@@ -4,8 +4,14 @@ const {
   getAllBookmarks,
   getBookmark,
   createBookmark,
+  deleteBookmark,
+  updateBookmark,
 } = require("../queries/bookmarks");
-const { checkBoolean, checkName } = require("../validations/checkBookmarks.js");
+const {
+  checkBoolean,
+  checkName,
+  validateURL,
+} = require("../validations/checkBookmarks.js");
 
 // INDEX
 bookmarks.get("/", async (req, res) => {
@@ -29,7 +35,7 @@ bookmarks.get("/:id", async (req, res) => {
 });
 
 // CREATE
-bookmarks.post("/", checkBoolean, checkName, async (req, res) => {
+bookmarks.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
   try {
     const bookmark = await createBookmark(req.body);
     res.json(bookmark);
@@ -37,5 +43,29 @@ bookmarks.post("/", checkBoolean, checkName, async (req, res) => {
     res.status(400).json({ error: error });
   }
 });
+
+// DELETE
+bookmarks.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedBookmark = await deleteBookmark(id);
+  if (deletedBookmark.id) {
+    res.status(200).json(deletedBookmark);
+  } else {
+    res.status(404).json("Bookmark not found");
+  }
+});
+
+// UPDATE
+bookmarks.put(
+  "/:id",
+  checkName,
+  checkBoolean,
+  validateURL,
+  async (req, res) => {
+    const { id } = req.params;
+    const updatedBookmark = await updateBookmark(id, req.body);
+    res.status(200).json(updatedBookmark);
+  }
+);
 
 module.exports = bookmarks;
