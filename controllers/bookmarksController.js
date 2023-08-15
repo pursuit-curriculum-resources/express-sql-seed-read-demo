@@ -62,6 +62,7 @@ bookmarks.put(
   checkBoolean,
   validateURL,
   async (req, res) => {
+    console.log("hiiii");
     const { id } = req.params;
     const updatedBookmark = await updateBookmark(id, req.body);
     res.status(200).json(updatedBookmark);

@@ -8,6 +8,7 @@ CREATE TABLE bookmarks (
  id SERIAL PRIMARY KEY,
  name TEXT NOT NULL,
  url TEXT,
+ description TEXT,
  category TEXT,
  is_favorite BOOLEAN
 );

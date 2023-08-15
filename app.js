@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
+const morgan = require("morgan");
 
 // CONFIGURATION
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+app.use(morgan("tiny"));
 
 // ROUTES
 app.get("/", (req, res) => {

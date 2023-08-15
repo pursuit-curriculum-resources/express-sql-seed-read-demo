@@ -53,6 +53,7 @@ const updateBookmark = async (id, bookmark) => {
     return error;
   }
 };
+
 module.exports = {
   getAllBookmarks,
   getBookmark,
