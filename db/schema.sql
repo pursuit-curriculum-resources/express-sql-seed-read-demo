@@ -9,5 +9,6 @@ CREATE TABLE bookmarks (
  name TEXT NOT NULL,
  url TEXT,
  category TEXT,
+ description TEXT,
  is_favorite BOOLEAN
 );
