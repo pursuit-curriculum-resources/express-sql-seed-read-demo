@@ -3,9 +3,6 @@ const express = require("express");
 const bookmarks = express.Router();
 const reviewsController = require("./reviewsController.js");
 
-// Configure router for nested routes
-bookmarks.use("/:bookmark_id/reviews", reviewsController);
-
 // Queries
 const {
   getAllBookmarks,
