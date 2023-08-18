@@ -1,3 +1,4 @@
+// Check that there is a name key/value
 const checkName = (req, res, next) => {
   if (req.body.name) {
     return next();
@@ -6,6 +7,8 @@ const checkName = (req, res, next) => {
   }
 };
 
+// Check that is_favorite is a boolean (or undefined)
+// Value can also come in as a string
 const checkBoolean = (req, res, next) => {
   const { is_favorite } = req.body;
   if (
@@ -20,6 +23,7 @@ const checkBoolean = (req, res, next) => {
   }
 };
 
+// Make sure that the URL starts with http:// or https://
 const validateURL = (req, res, next) => {
   if (
     req.body.url.substring(0, 7) === "http://" ||

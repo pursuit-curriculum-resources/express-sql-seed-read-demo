@@ -1,7 +1,12 @@
+// Dependencies
 const express = require("express");
 
-const { getBookmark } = require("../queries/bookmarks.js");
+// Configure router for nested routes
+// Pass option to allow access to bookmarks route parameters
 const reviews = express.Router({ mergeParams: true });
+
+// Queries
+const { getBookmark } = require("../queries/bookmarks.js");
 const {
   getAllReviews,
   getReview,
