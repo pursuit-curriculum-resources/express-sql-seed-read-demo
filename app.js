@@ -19,8 +19,9 @@ app.get("/", (req, res) => {
 const bookmarksController = require("./controllers/bookmarksController.js");
 app.use("/bookmarks", bookmarksController);
 
-const reviewsController = require("./controllers/reviewsController.js");
-app.use("/reviews", reviewsController);
+// Not needed for this application's features
+// const reviewsController = require("./controllers/reviewsController.js");
+// app.use("/reviews", reviewsController);
 
 // 404 PAGE
 app.get("*", (req, res) => {
