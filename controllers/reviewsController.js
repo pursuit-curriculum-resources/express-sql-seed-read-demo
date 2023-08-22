@@ -16,16 +16,23 @@ const {
 
 // INDEX
 reviews.get("/", async (req, res) => {
-  const reviews = await getAllReviews();
-  res.status(200).json(reviews);
+  const { bookmark_id } = req.params;
+  const reviews = await getAllReviews(bookmark_id);
+  const bookmark = await getBookmark(bookmark_id);
+  if (bookmark.id) {
+    res.status(200).json({ ...bookmark, reviews });
+  } else {
+    res.status(500).json({ error: "bookmark not found or server error" });
+  }
 });
 
 // SHOW
 reviews.get("/:id", async (req, res) => {
-  const { id } = req.params;
+  const { bookmark_id, id } = req.params;
   const review = await getReview(id);
+  const bookmark = await getBookmark(bookmark_id);
   if (review) {
-    res.json(review);
+    res.json({ ...bookmark, review });
   } else {
     res.status(404).json({ error: "not found" });
   }
